@@ -3,83 +3,67 @@
 
 package Lab_Practicals;
 import java.util.*;
+class stack {
+    int top = -1, n = 100;
+    int a[] = new int[n];
+
+    void push() {
+        if (top == (n - 1)) {
+            System.out.println("Overflow");
+        } else {
+            System.out.print("Enter data:");
+            Scanner sc = new Scanner(System.in);
+            int i = sc.nextInt();
+            top++;
+            a[top] = i;
+            System.out.println("Element Inserted!");
+        }
+    }
+    void pop() {
+        if (top == -1) {
+            System.out.println("Underflow");
+        } else {
+            top--;
+            System.out.println("Deleted!");
+        }
+    }
+    void display() {
+        System.out.println("Items are:");
+        for (int i = top; i>= 0; i--) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.print("\n");
+    }
+}
 public class practical_20 {
     public static void main(String[] args) {
-
-        class Stack<T> {
-            private ArrayList<T> A;
-            private int top = -1;
-            private int size;
-
-            public Stack(int size) {
-                this.size = size;
-                this.A = new ArrayList<>(size);
+        int a;
+        stack s = new stack();
+        System.out.println("1) Push");
+        System.out.println("2) Pop");
+        System.out.println("3) Display");
+        System.out.println("4) Exit");
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.print("Enter your choice:");
+            a = sc.nextInt();
+            switch (a) {
+                case 1:
+                    s.push();
+                    break;
+                case 2:
+                    s.pop();
+                    break;
+                case 3:
+                    s.display();
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Invalid Input");
+                    break;
             }
-
-            public void push(T X) {
-                if (top + 1 == size) {
-                    System.out.println("Stack Overflow");
-                } else {
-                    top++;
-                    if (A.size() > top)
-                        A.set(top, X);
-                    else
-                        A.add(X);
-                }
-            }
-
-            public T top() {
-                if (top == -1) {
-                    System.out.println("Stack Underflow");
-                    return null;
-                } else
-                    return A.get(top);
-            }
-
-            public void pop() {
-                if (top == -1) {
-                    System.out.println("Stack Underflow");
-                } else
-                    top--;
-            }
-
-            public boolean empty() {
-                return top == -1;
-            }
-
-            public String toString() {
-                StringBuilder ans = new StringBuilder();
-                for (int i = 0; i < top; i++) {
-                    ans.append(A.get(i)).append("->");
-                }
-                ans.append(A.get(top));
-                return ans.toString();
-            }
-        }
-
-        class StackDemo {
-            public static void main(String[] args) {
-                Stack<Integer> intStack = new Stack<>(3);
-                intStack.push(10);
-                intStack.push(20);
-                intStack.push(30);
-                System.out.println("intStack after pushing 10, 20, and 30:\n" + intStack);
-                intStack.pop();
-                System.out.println("intStack after pop:\n" + intStack);
-
-                Stack<String> stringStack = new Stack<>(3);
-                stringStack.push("hello");
-                stringStack.push("world");
-                stringStack.push("java");
-                System.out.println("\nstringStack after pushing 3 elements:\n" + stringStack);
-                stringStack.push("GFG"); // This will cause Stack Overflow
-
-                Stack<Float> floatStack = new Stack<>(2);
-                floatStack.push(100.0f);
-                floatStack.push(200.0f);
-                System.out.println("\nfloatStack after pushing 2 elements:\n" + floatStack);
-                System.out.println("Top element of floatStack:\n" + floatStack.top());
-            }
-        }
+        } while (a != 4);
+        sc.close();
     }
 }
